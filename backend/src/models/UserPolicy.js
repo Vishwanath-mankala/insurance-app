@@ -31,7 +31,6 @@ const userPolicySchema = new mongoose.Schema({
   assignedAgentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
   },
   nominee: {
     type: Object,

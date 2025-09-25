@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js"
 import policyRoutes from "./routes/policyRoutes.js"
 import userPolicyRoutes from "./routes/userPolicyRoutes.js"
+import claimRoutes from "./routes/claimRoutes.js"
 const app = express();
 
 dotenv.config();
@@ -13,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 const startServer = async () => {
-  //   app.use("/api/v1/claims", claimRoutes);
+    app.use("/api/v1/claims", claimRoutes);
     app.use("/api/v1/policies", policyRoutes);
     app.use("/api/v1/auth", authRoutes);
     app.use("/api/v1/user", userPolicyRoutes);

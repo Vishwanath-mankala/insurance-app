@@ -1,98 +1,73 @@
 import PolicyProduct from "../models/PolicyProduct.js";
-import userPolicy from "../models/UserPolicy.js";
+import UserPolicy from "../models/UserPolicy.js";
+import Claim from "../models/Claim.js";
 
-export const getAll = async () => {
-  try {
-    const allPolicies = await PolicyProduct.find();
-    return allPolicies;
-  } catch (error) {
-    throw new Error("Error fetching policies: " + error.message);
-  }
+// --- PolicyProduct Services ---
+
+export const getAllPolicies = async () => {
+  return await PolicyProduct.find();
 };
 
 export const getPolicyDetails = async (id) => {
-  try {
-    const policyDetails = await PolicyProduct.findOne({ _id: id });
-    return policyDetails;
-  } catch (error) {
-    throw new Error("Error fetching policies: " + error.message);
-  }
+  const policy = await PolicyProduct.findById(id);
+  if (!policy) throw new Error("Policy not found");
+  return policy;
 };
+
 export const createPolicy = async (policyData) => {
-  try {
-    const policy = new PolicyProduct(policyData);
-    await policy.save();
-    return policy;
-  } catch (error) {
-    throw new Error(error.message || "Error creating policy");
-  }
+  if (!policyData.code || !policyData.title) throw new Error("Code and Title are required");
+  return await PolicyProduct.create(policyData);
 };
 
 export const deletePolicy = async (id) => {
-  try {
-    const policy = await PolicyProduct.findByIdAndDelete(id);
-    return policy; // null if not found
-  } catch (error) {
-    throw new Error(error.message || "Error deleting policy");
-  }
+  const policy = await PolicyProduct.findByIdAndDelete(id);
+  if (!policy) throw new Error("Policy not found");
+  return policy;
 };
 
-export const purchasePolicy = async (userId, policyProductId, policyData) => {
-  try {
-    const { termMonths, nominee, assignedAgentId } = policyData;
-    const policyProduct = await PolicyProduct.findOne({ _id: policyProductId });
-    if (!policyProduct) throw new Error("Policy Product not found");
-    const startDate = new Date();
-    // Logic to save the purchased policy to the database
-    const userPurchasedPolicy = await userPolicy.create({
-      userId: userId,
-      policyProductId: policyProductId,
-      startDate: startDate,
-      endDate: new Date(
-        new Date(startDate).setMonth(
-          new Date(startDate).getMonth() + termMonths
-        )
-      ),
-      assignedAgentId: assignedAgentId,
-      premiumPaid: policyProduct.premium,
-      status: "active",
-      nominee: nominee,
-      createdAt: Date.now(),
-    });
-    userPurchasedPolicy.save();
+// --- UserPolicy Services ---
 
-    return userPurchasedPolicy;
-  } catch (error) {
-    throw new Error("Error purchasing policy:" + error.message);
-  }
+export const purchasePolicy = async (userId, policyProductId, { termMonths, nominee, assignedAgentId }) => {
+  const policyProduct = await PolicyProduct.findById(policyProductId);
+  if (!policyProduct) throw new Error("Policy Product not found");
+
+  const startDate = new Date();
+  const endDate = new Date(startDate);
+  endDate.setMonth(endDate.getMonth() + termMonths);
+
+  return await UserPolicy.create({
+    userId,
+    policyProductId,
+    startDate,
+    endDate,
+    assignedAgentId,
+    premiumPaid: policyProduct.premium,
+    status: "active",
+    nominee,
+    createdAt: Date.now(),
+  });
 };
+
 export const getUserPolicies = async (userId) => {
-  try {
-    const policies = await userPolicy
-      .find({ userId })
-      .populate("policyProductId") // fetch full details of the product
-      .exec();
-
-    return policies;
-  } catch (error) {
-    throw new Error("Error fetching user policies: " + error.message);
-  }
+  return await UserPolicy.find({ userId })
+    .populate("policyProductId") // fetch full product details
+    .exec();
 };
 
 export const cancelPolicy = async (userId, policyId) => {
-  try {
-    const cancelledPolicy = await userPolicy.findOneAndUpdate(
-      { _id: policyId, userId, status: "active" },
-      { status: "cancelled" },
-      { new: true } // return the updated document
-    );
-
-    if (!cancelledPolicy) {
-      throw new Error("Policy not found or not owned by user");
-    }
-
-    return cancelledPolicy;
-  } catch (error) {
-    throw new Error("Error cancelling policy: " + error.message);
+  // Optional: prevent cancellation if pending claims exist
+  const pendingClaims = await Claim.find({ userPolicyId: policyId, status: "PENDING" });
+  if (pendingClaims.length > 0) {
+    throw new Error("Cannot cancel policy with pending claims");
   }
+
+  const cancelledPolicy = await UserPolicy.findOneAndUpdate(
+    { _id: policyId, userId, status: "active" },
+    { status: "cancelled" },
+    { new: true }
+  );
+
+  if (!cancelledPolicy) throw new Error("Policy not found, not active, or not owned by user");
+
+  return cancelledPolicy;
 };
