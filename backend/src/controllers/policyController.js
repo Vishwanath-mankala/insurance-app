@@ -27,12 +27,17 @@ export const getPolicyDetails = async (req, res) => {
 // Purchase a new policy
 export const purchasePolicy = async (req, res) => {
   try {
-    const { userId, policyProductId, startDate, termMonths, nominee } = req.body;
+    if (!req.user && req.user.role !== "customer") {
+      return res.status(401).json({ message: "Unauthorized access" });
+    }
+    const userId = req.user.userId; // ✅ from auth middleware
+    const { termMonths, nominee, assignedAgentId } = req.body;
+    const { id: policyProductId } = req.params;
 
     const newPolicy = await policyService.purchasePolicy(
       userId,
       policyProductId,
-      { startDate, termMonths, nominee }
+      { termMonths, nominee, assignedAgentId }
     );
 
     res.status(201).json(newPolicy);
@@ -41,10 +46,10 @@ export const purchasePolicy = async (req, res) => {
   }
 };
 
-// List all policies owned by a user
+// List all policies owned by current user
 export const getUserPolicies = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user.id; // ✅ from auth
     const policies = await policyService.getUserPolicies(userId);
     res.status(200).json(policies);
   } catch (error) {
@@ -55,13 +60,53 @@ export const getUserPolicies = async (req, res) => {
 // Cancel a user’s active policy
 export const cancelPolicy = async (req, res) => {
   try {
-    const { userId, policyId } = req.body;
+    const userId = req.user.id; // ✅ from auth
+    const { id: policyId } = req.params;
 
     const cancelledPolicy = await policyService.cancelPolicy(userId, policyId);
 
     res.status(200).json({
       message: "Policy cancelled successfully",
       policy: cancelledPolicy,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const createPolicyController = async (req, res) => {
+  try {
+    const policyData = req.body;
+
+    // Validate basic input (optional, can add Joi or Yup later)
+    if (!policyData.code || !policyData.title) {
+      return res.status(400).json({ message: "Code and Title are required" });
+    }
+
+    const policy = await policyService.createPolicy(policyData);
+
+    res.status(201).json({
+      message: "Policy created successfully",
+      policy,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const deletePolicyController = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const policy = await policyService.deletePolicy(id);
+
+    if (!policy) {
+      return res.status(404).json({ message: "Policy not found" });
+    }
+
+    res.status(200).json({
+      message: "Policy deleted successfully",
+      deletedPolicy: policy,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

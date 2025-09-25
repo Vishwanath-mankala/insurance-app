@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import authRoutes from "./routes/authRoutes.js"
+import policyRoutes from "./routes/policyRoutes.js"
+import userPolicyRoutes from "./routes/userPolicyRoutes.js"
 const app = express();
 
 dotenv.config();
@@ -12,8 +14,9 @@ app.use(express.json());
 
 const startServer = async () => {
   //   app.use("/api/v1/claims", claimRoutes);
-  //   app.use("/api/v1/policies", policyRoutes);
-  app.use("/api/v1/auth", authRoutes);
+    app.use("/api/v1/policies", policyRoutes);
+    app.use("/api/v1/auth", authRoutes);
+    app.use("/api/v1/user", userPolicyRoutes);
   //   app.use("/api/v1/payments", paymentRoutes);
   //   app.use("/api/v1/agents", agentRoutes);
   //   app.use("/api/v1/admin", adminRoutes);
