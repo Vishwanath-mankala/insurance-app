@@ -26,7 +26,7 @@ const userPolicySchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["ACTIVE", "CANCELLED", "EXPIRED"],
+    enum: ["active", "cancelled", "expired"],
   },
   assignedAgentId: {
     type: mongoose.Schema.Types.ObjectId,
