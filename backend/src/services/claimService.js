@@ -16,7 +16,7 @@ export const getClaims = async (user) => {
   }
 
   // Customer sees only their claims
-  return Claim.find({ userId: user._id }).populate("userPolicyId");
+  return Claim.find({ userId: user.userId }).populate("userPolicyId");
 };
 
 // Claim detail (role-based access handled in controller)

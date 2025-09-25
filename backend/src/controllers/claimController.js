@@ -11,7 +11,7 @@ export const submitClaimController = async (req, res) => {
     const { userPolicyId, incidentDate, description, amountClaimed } = req.body;
 
     const claim = await submitClaim({
-      userId: req.user._id, // customer making the claim
+      userId: req.user.userId, // customer making the claim
       userPolicyId,
       incidentDate,
       description,
@@ -43,7 +43,7 @@ export const claimDetailController = async (req, res) => {
     // Only admin/agent OR claim owner can view
     if (
       req.user.role === "customer" &&
-      claim.userId._id.toString() !== req.user._id.toString()
+      claim.userId._id.toString() !== req.user.userId.toString()
     ) {
       return res.status(403).json({ message: "Access denied" });
     }
@@ -62,7 +62,7 @@ export const updateClaimStatusController = async (req, res) => {
     const claim = await updateClaimStatus(req.params.id, {
       status,
       decisionNotes,
-      agentId: req.user._id,
+      agentId: req.user.userId,
     });
 
     if (!claim) return res.status(404).json({ message: "Claim not found" });
