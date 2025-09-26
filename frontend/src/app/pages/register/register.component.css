@@ -1,38 +1,68 @@
- body {
-         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            background-color: #f4f7f9;
-            margin: 0; /* Removed flex properties for broader compatibility */
-            color: #333;
+:root {
+            --primary-color: #007bff;
+            --background-color: #f0f2f5;
+            --card-background: #ffffff;
+            --text-color-dark: #111827;
+            --text-color-light: #6b7280;
+            --label-color: #374151;
+            --border-color: #d1d5db;
+            --input-bg-color: #f9fafb;
+            --error-color: #ef4444;
+            --white: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --focus-shadow: rgba(0, 123, 255, 0.25);
+        }
+
+        /* --- General Body Styles --- */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            color: var(--text-color-dark);
+            line-height: 1.6;
         }
 
         /* --- Main Container --- */
         .register-container {
-              width: 100%;
-            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 1.5rem;
-            /* FIX: Use margin: auto for robust horizontal centering */
-            /* Added top/bottom margin for vertical spacing */
-            margin: 5rem auto; 
+            width: 100%;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
         /* --- Form Card Styling --- */
         .register-form {
-            background-color: #ffffff;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            max-width: 420px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 3rem;
+            background-color: var(--card-background);
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1.5rem;
+            box-sizing: border-box;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .register-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
         }
 
         /* --- Form Title --- */
         .register-form h2 {
-        text-align: center;
+            text-align: center;
             margin: 0 0 1rem 0;
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: #2c3e50;
+            color: var(--text-color-dark);
+            font-weight: 900;
+            font-size: 2rem;
         }
 
         /* --- Form Group --- */
@@ -45,78 +75,100 @@
         .form-label {
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #555; /* Slightly softer than pure black */
+            color: var(--label-color);
             font-size: 0.9rem;
+        }
+        
+        /* --- Input Wrapper for Icon --- */
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper .icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            pointer-events: none;
+            width: 1.1rem;
+            height: 1.1rem;
         }
 
         /* --- Input Fields --- */
         .form-input {
             width: 100%;
-            padding: 12px 14px;
+            padding: 12px 14px 12px 45px;
             font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px; /* Matching border-radius */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             box-sizing: border-box;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            background-color: var(--input-bg-color);
+            color: var(--text-color-dark);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            border-color: var(--primary-color);
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px var(--focus-shadow);
         }
 
         /* --- Submit Button --- */
-        .register-btn {
-            margin-top: 1rem;
-            width: 100%;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            background: linear-gradient(90deg, #007bff, #0056b3);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .register-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
-        }
 
-        .register-btn:disabled {
-            background: #aaa;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+        
 
         /* --- Loading spinner style --- */
         .loading-spinner {
             text-align: center;
-            margin-top: 2rem;
+            padding: 2rem;
             font-size: 1.2rem;
-            color: #555;
-            font-weight: bold;
+            color: var(--label-color);
+            font-weight: 600;
         }
         
         /* --- Message Area for Feedback --- */
         .register-message {
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             padding: 12px;
             border-radius: 8px;
             font-weight: 500;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             box-sizing: border-box;
+        }
+        
+        .register-message.error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+        
+        .register-message.success {
+            background-color: #dcfce7;
+            color: #166534;
         }
 
         /* --- Styling for the red validation error text --- */
         .validation-error {
-            color: #d9534f; /* A standard error red */
-            font-size: 0.85rem;
-            margin-top: 5px; /* Space between input and error text */
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .validation-error .icon {
+            width: 1rem;
+            height: 1rem;
         }

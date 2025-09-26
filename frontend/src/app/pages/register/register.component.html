@@ -1,39 +1,160 @@
 <div class="register-container">
-
   <div *ngIf="!loading; else spinner">
-    
     <form (ngSubmit)="register()" #registerForm="ngForm" class="register-form">
       <h2>Create Account</h2>
 
       <div class="form-group">
         <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" required [(ngModel)]="name" name="name" #nameField="ngModel" class="form-input" autocomplete="name"/>
-        
-        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="validation-error">
+
+        <div class="input-wrapper">
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+            />
+          </svg>
+          <input
+            type="text"
+            id="name"
+            required
+            [(ngModel)]="name"
+            name="name"
+            #nameField="ngModel"
+            class="form-input"
+            autocomplete="name"
+          />
+        </div>
+        <div
+          *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)"
+          class="validation-error"
+        >
           Name is required.
         </div>
       </div>
-      
-      <div class="form-group">
+
+<div class="form-group">
         <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" required email [(ngModel)]="email" name="email" #emailField="ngModel" class="form-input" autocomplete="email"/>
-        
-        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="validation-error">
+        <div class="input-wrapper">
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+            />
+          </svg>
+          <input
+            type="email"
+            id="email"
+            required
+            email
+            [(ngModel)]="email"
+            name="email"
+            #emailField="ngModel"
+            class="form-input"
+            autocomplete="email"
+            placeholder="you@example.com"
+          />
+        </div>
+        <div
+          *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
+          class="validation-error"
+        >
           <div *ngIf="emailField.errors?.['required']">Email is required.</div>
-          <div *ngIf="emailField.errors?.['email']">Please enter a valid email address.</div>
+          <div *ngIf="emailField.errors?.['email']">
+            Please enter a valid email address.
+          </div>
         </div>
       </div>
-      
+
       <div class="form-group">
         <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" required minlength="6" [(ngModel)]="password" name="password" #passwordField="ngModel" class="form-input" autocomplete="new-password"/>
-        
-        <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="validation-error">
-            <div *ngIf="passwordField.errors?.['required']">Password is required.</div>
-            <div *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters long.</div>
+        <div class="input-wrapper">
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+            />
+          </svg>
+          <input
+            type="password"
+            id="password"
+            required
+            minlength="6"
+            [(ngModel)]="password"
+            name="password"
+            #passwordField="ngModel"
+            class="form-input"
+            autocomplete="new-password"
+            placeholder="••••••••"
+          />
+        </div>
+        <div
+          *ngIf="
+            passwordField.invalid &&
+            (passwordField.dirty || passwordField.touched)
+          "
+          class="validation-error"
+        >
+          <div *ngIf="passwordField.errors?.['required']">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+              />
+            </svg>
+            Password is required.
+          </div>
+          <div *ngIf="passwordField.errors?.['minlength']">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+              />
+            </svg>
+            Password must be at least 6 characters.
+          </div>
         </div>
       </div>
-      
+
       <app-custom-button
         [label]="'Register'"
         [type]="'submit'"
@@ -48,5 +169,4 @@
   </ng-template>
 
   <p *ngIf="message" class="register-message">{{ message }}</p>
-
 </div>
