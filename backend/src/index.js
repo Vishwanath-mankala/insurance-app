@@ -8,6 +8,7 @@ import policyRoutes from "./routes/policyRoutes.js"
 import userPolicyRoutes from "./routes/userPolicyRoutes.js"
 import claimRoutes from "./routes/claimRoutes.js"
 import paymentRoutes from "./routes/paymentRoutes.js"
+import agentRoutes from "./routes/agentRoutes.js"
 
 const app = express();
 
@@ -21,7 +22,7 @@ const startServer = async () => {
     app.use("/api/v1/auth", authRoutes);
     app.use("/api/v1/user", userPolicyRoutes);
     app.use("/api/v1/payments", paymentRoutes);
-  //   app.use("/api/v1/agents", agentRoutes);
+    app.use("/api/v1/agents", agentRoutes);
   //   app.use("/api/v1/admin", adminRoutes);
   
   mongoose
