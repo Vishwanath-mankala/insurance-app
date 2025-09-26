@@ -1,7 +1,17 @@
 import Claim from "../models/Claim.js";
+import UserPolicy from "../models/UserPolicy.js";
 
 // Submit a new claim
 export const submitClaim = async (data) => {
+  const { userPolicyId } = data;
+
+  const userPolicy = await UserPolicy.findById(userPolicyId);
+  if (!userPolicy) {
+    throw new Error("Policy not found");
+  }
+  if (userPolicy.status === "cancelled" || userPolicy.status === "expired") {
+    throw new Error("Cannot submit claim for cancelled or expired policy");
+  }
   const claim = new Claim(data);
   await claim.save();
   return claim;
@@ -27,7 +37,10 @@ export const getClaimById = async (id) => {
 };
 
 // Update status (agent/admin only)
-export const updateClaimStatus = async (id, { status, decisionNotes, agentId }) => {
+export const updateClaimStatus = async (
+  id,
+  { status, decisionNotes, agentId }
+) => {
   return Claim.findByIdAndUpdate(
     id,
     {
