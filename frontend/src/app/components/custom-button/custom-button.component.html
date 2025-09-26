@@ -1,0 +1,12 @@
+<button
+  [ngClass]="{
+    btn: true,
+    'btn-primary': color === 'primary',
+    'btn-accent': color === 'accent',
+    'btn-warn': color === 'warn',
+    'btn-secondary':color ==='secondary'
+  }"
+  (click)="onClick()"
+>
+  {{ label }}
+</button>

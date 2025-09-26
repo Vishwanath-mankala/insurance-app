@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global font */
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9fafb; /* optional light gray background */
+  color: #222; /* default text color */
+}
+
+h1, h2, h3 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700; /* bold */
+}
+
+p, span {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400; /* normal */
+}
+
+small {
+  font-weight: 300; /* light */
+}
