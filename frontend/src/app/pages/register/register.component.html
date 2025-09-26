@@ -1,0 +1,52 @@
+<div class="register-container">
+
+  <div *ngIf="!loading; else spinner">
+    
+    <form (ngSubmit)="register()" #registerForm="ngForm" class="register-form">
+      <h2>Create Account</h2>
+
+      <div class="form-group">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" required [(ngModel)]="name" name="name" #nameField="ngModel" class="form-input" autocomplete="name"/>
+        
+        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="validation-error">
+          Name is required.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" required email [(ngModel)]="email" name="email" #emailField="ngModel" class="form-input" autocomplete="email"/>
+        
+        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="validation-error">
+          <div *ngIf="emailField.errors?.['required']">Email is required.</div>
+          <div *ngIf="emailField.errors?.['email']">Please enter a valid email address.</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" required minlength="6" [(ngModel)]="password" name="password" #passwordField="ngModel" class="form-input" autocomplete="new-password"/>
+        
+        <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="validation-error">
+            <div *ngIf="passwordField.errors?.['required']">Password is required.</div>
+            <div *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters long.</div>
+        </div>
+      </div>
+      
+      <app-custom-button
+        [label]="'Register'"
+        [type]="'submit'"
+        [color]="'secondary'"
+        [disabled]="registerForm.invalid || loading"
+      ></app-custom-button>
+    </form>
+  </div>
+
+  <ng-template #spinner>
+    <div class="loading-spinner">Loading...</div>
+  </ng-template>
+
+  <p *ngIf="message" class="register-message">{{ message }}</p>
+
+</div>
