@@ -28,6 +28,6 @@ export const login_ = async ({ email, password }) => {
   );
   return {
     token,
-    userData: {  userId:user._id, name: user.name, role: user.role },
+    userData: {  userId:user._id, name: user.name,email:user.email, role: user.role },
   };
 };
