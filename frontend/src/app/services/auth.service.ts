@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
-  authUrl = 'http://localhost:4000/api/v1/auth';
+  authUrl = `${environment.apiUrl}/auth`;
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService,private router:Router) {
     if (this.checkLogin()) {
       const token = localStorage.getItem('token');
