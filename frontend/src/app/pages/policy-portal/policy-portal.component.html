@@ -14,22 +14,23 @@
   <div class="portal-header">
     <h2 class="portal-title">Available Insurance Policies</h2>
     <p class="portal-subtitle">
-      Choose the right policy that fits your needs — compare, view details, or buy instantly.
+      Choose the right policy that fits your needs — compare, view details, or
+      buy instantly.
     </p>
   </div>
 
   <div class="policy-grid">
-    @for (policy of allPolicies; track $index) {
-      <app-card
-        [title]="policy.title"
-        [content]="policy.description"
-        [premium]="policy.premium"
-        [term]="policy.termMonths"
-        [coverage]="policy.minSumInsured"
-        [isFeatured]="true"
-        (onClick_view)="viewPolicyDetails(policy.id)"
-        (onClick_buy)="buyPolicy(policy.id)"
-      ></app-card>
+    @for (policy of allPolicies; track policy._id) {
+    <app-card
+      [title]="policy.title"
+      [content]="policy.description"
+      [premium]="policy.premium"
+      [term]="policy.termMonths"
+      [coverage]="policy.minSumInsured"
+      (onClick_view)="viewPolicyDetails(policy._id)"
+      (onClick_buy)="buyPolicy(policy._id)"
+    ></app-card>
+
     }
   </div>
 </section>

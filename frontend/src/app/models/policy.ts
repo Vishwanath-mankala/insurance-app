@@ -1,6 +1,6 @@
 export class Policy {
     constructor(
-    public id: number,
+    public _id: string,
     public createdAt: Date,
     public description: string,
     public code: string,

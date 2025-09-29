@@ -1,6 +1,4 @@
 <div class="card">
-  <div class="card-badge" *ngIf="isFeatured">⭐ Recommended</div>
-  
   <div class="card-body">
     <h4 class="card-title">{{ title }}</h4>
     <p class="card-text">{{ content }}</p>
@@ -15,12 +13,12 @@
       <app-custom-button
         [label]="'View Details'"
         [color]="'primary'"
-        (clicked)="onClick_view()"
+        (clicked)="view()"
       ></app-custom-button>
       <app-custom-button
         [label]="'Buy'"
         [color]="'secondary'"
-        (clicked)="onClick_buy()"
+        (clicked)="buy()"
       ></app-custom-button>
     </div>
   </div>

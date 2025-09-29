@@ -1,0 +1,87 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="userRole"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Dashboard', path: '/dashboard', roles: ['customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'], primary: true },
+    { label: 'Settings', path: '/settings', disabled: false }
+  ]"
+>
+</app-custom-navbar>
+<div class="dashboard">
+  <!-- Stats Section -->
+  <div class="stats">
+    <div class="stat-card">
+      <h3>{{ totalPolicies }}</h3>
+      <p>Total Policies</p>
+    </div>
+    <div class="stat-card">
+      <h3>{{ activePolicies }}</h3>
+      <p>Active Policies</p>
+    </div>
+    <div class="stat-card">
+      <h3>{{ totalClaims }}</h3>
+      <p>Total Claims</p>
+    </div>
+    <div class="stat-card">
+      <h3>{{ pendingClaims }}</h3>
+      <p>Pending Claims</p>
+    </div>
+  </div>
+
+  <!-- User Policies -->
+  <section>
+    <app-custom-button
+      [label]="'Explore More Policies'"
+      [color]="'primary'"
+      (clicked)="toPolicyPortal()"
+    ></app-custom-button>
+
+    <h2>Your Policies</h2>
+    <div class="grid">
+      <div class="card" *ngFor="let policy of userPolicies">
+        <h3>{{ findTitle(policy.policyProductId._id) }}</h3>
+        <p>Status: {{ policy.status }}</p>
+        <p>Premium Paid: {{ policy.premiumPaid | currency:'INR' }}</p>
+
+        <!-- Repayment -->
+        <button (click)="toRepay(policy._id)">
+          Repay
+        </button>
+
+        <!-- Submit Claim -->
+        <button (click)="toSubmitClaim(policy._id)">
+          Submit Claim
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Claims -->
+  <section>
+    <h2>Your Claims</h2>
+    <table *ngIf="claims.length > 0; else noClaims">
+      <thead>
+        <tr>
+          <th>Policy</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let claim of claims">
+          <td>{{ findTitle(claim.userPolicyId.policyProductId) }}</td>
+          <td>{{ claim.description }}</td>
+          <td>{{ claim.amountClaimed | currency:'INR' }}</td>
+          <td [class.pending]="claim.status === 'PENDING'">{{ claim.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noClaims>
+      <p>No claims submitted yet.</p>
+    </ng-template>
+  </section>
+</div>

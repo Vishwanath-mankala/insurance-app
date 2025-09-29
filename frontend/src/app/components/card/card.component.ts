@@ -1,30 +1,28 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CustomButtonComponent } from "../custom-button/custom-button.component";
+import { CustomButtonComponent } from '../custom-button/custom-button.component';
 
 @Component({
   selector: 'app-card',
+  standalone: true,
   imports: [CustomButtonComponent],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  @Input() isFeatured: boolean = true;
-  @Input() title: String = '';
-  @Input() content: String = '';
-  @Input() footer: String = '';
-  @Input() imageUrl: String = '';
-  @Input() premium: number = 0;
-  @Input() term: number = 0;
-  @Input() coverage: number = 0;
+  @Input() title!: string;
+  @Input() content!: string;
+  @Input() premium!: number;
+  @Input() term!: number;
+  @Input() coverage!: number;
 
-  @Output() view = new EventEmitter<void>();
-  @Output() buy = new EventEmitter<void>();
+  @Output() onClick_view = new EventEmitter<void>();
+  @Output() onClick_buy = new EventEmitter<void>();
 
-  onClick_view() {
-    this.view.emit();
+  view() {
+    this.onClick_view.emit();
   }
-  
-  onClick_buy() {
-    this.buy.emit();
+
+  buy() {
+    this.onClick_buy.emit();
   }
 }
