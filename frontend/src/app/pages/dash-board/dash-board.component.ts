@@ -47,11 +47,23 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-     this.authService.user$.subscribe(
-      user=>{
-        this.userRole = user?.role
+    this.authService.user$.subscribe(
+      user => {
+        this.userRole = user?.role;
+        
+        // Redirect admin users to admin page
+        if (user?.role === 'admin') {
+          this.router.navigate(['/admin']);
+          return;
+        }
+        
+        // Load dashboard data for non-admin users
+        this.loadDashboardData();
       }
-    )
+    );
+  }
+
+  private loadDashboardData(): void {
     forkJoin({
       policies: this.policyService.getAllPolicies(),
       userPolicies: this.policyService.getUserPolicies(),

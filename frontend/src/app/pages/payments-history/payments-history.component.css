@@ -1,0 +1,14 @@
+.payments {
+  padding: 16px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+}
+.error { color: #d32f2f; }
+
+

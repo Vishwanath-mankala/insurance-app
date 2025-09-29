@@ -30,3 +30,16 @@ small {
   --indigo-dye: #284b63;
 }
 
+/* Utility */
+.container { max-width: 1100px; margin: 0 auto; }
+.btn { padding: 8px 12px; border: none; cursor: pointer; border-radius: 6px; }
+.btn.primary { background: #1976d2; color: #fff; }
+.btn.danger { background: #d32f2f; color: #fff; }
+.btn.warning { background: #ed6c02; color: #fff; }
+.btn.success { background: #2e7d32; color: #fff; }
+
+/* Navbar tweaks */
+.navbar { background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.navbar .navbar-link { margin-left: 12px; }
+.navbar .navbar-link-primary { color: #1976d2; font-weight: 600; }
+

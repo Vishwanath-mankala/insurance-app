@@ -1,0 +1,42 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="userRole"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+    { label: 'Payments', path: '/payments', roles: ['customer','admin'] }
+  ]"
+>
+</app-custom-navbar>
+
+<section class="payments">
+  <h2>Payments History</h2>
+
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table class="table" *ngIf="!loading && !error && payments?.length; else noPayments">
+    <thead>
+      <tr>
+        <th>Due Date</th>
+        <th>Policy</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of payments">
+        <td>{{ p.dueDate | date:'short' }}</td>
+        <td>{{ p.userPolicyId?.policyProductId?.title || p.policyType || p.userPolicyId }}</td>
+        <td>{{ p.amount | currency:'INR' }}</td>
+        <td>{{ (p.status || 'paid') | uppercase }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noPayments>
+    <p>No payments recorded.</p>
+  </ng-template>
+</section>
+
+

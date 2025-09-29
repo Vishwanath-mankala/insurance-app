@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 export interface NavLink {
   label: string;
@@ -28,5 +29,11 @@ export class CustomNavbarComponent {
       return true; // visible to everyone if no role restriction
     }
     return this.userRole ? link.roles.includes(this.userRole) : false;
+  }
+
+  constructor(private auth: AuthService) {}
+
+  logout() {
+    this.auth.logout();
   }
 }

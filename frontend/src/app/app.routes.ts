@@ -112,4 +112,13 @@ export const routes: Routes = [
     canActivate: [authGuard, authRoleGuard],
     data: { roles: ['admin'] },
   },
+  {
+    path: 'payments',
+    loadComponent: () =>
+      import('./pages/payments-history/payments-history.component').then(
+        (m) => m.PaymentsHistoryComponent
+      ),
+    canActivate: [authGuard, authRoleGuard],
+    data: { roles: ['customer','admin'] },
+  },
 ];
