@@ -1,0 +1,41 @@
+.policy-portal {
+  padding: 100px 20px 60px;
+  background: linear-gradient(135deg, var(--platinum) 0%, var(--white) 100%);
+  min-height: 100vh;
+}
+
+.portal-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.portal-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--indigo-dye);
+  margin-bottom: 12px;
+}
+
+.portal-subtitle {
+  font-size: 1.1rem;
+  color: var(--jet);
+  opacity: 0.8;
+}
+
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 0 10px;
+}
+
+app-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+app-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(40, 75, 99, 0.2);
+  border-radius: 16px;
+}

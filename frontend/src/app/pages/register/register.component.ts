@@ -29,6 +29,7 @@ export class RegisterComponent {
       .subscribe({
         next: (user) => {
           this.message = 'Registration successful! Please log in.';
+          // console.log(user);
           setTimeout(() => {
             this.loading=false;
             this.router.navigate(['/login']);
