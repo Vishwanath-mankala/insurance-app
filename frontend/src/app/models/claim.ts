@@ -4,7 +4,7 @@ export class Claim {
   constructor(
     public id: string,
     public userId: string,
-    public userPolicyId: {},
+    public userPolicyId: {policyProductId:string},
     public incidentDate: string,
     public description: string,
     public amountClaimed: number,
