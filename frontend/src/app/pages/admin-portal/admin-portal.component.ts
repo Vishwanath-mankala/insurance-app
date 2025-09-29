@@ -6,6 +6,7 @@ import { InsuranceService } from '../../services/insurance.service';
 import { Policy } from '../../models/policy';
 import { Claim } from '../../models/claim';
 import { CustomNavbarComponent } from '../../components/custom-navbar/custom-navbar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-portal',
@@ -30,7 +31,8 @@ export class AdminPortalComponent implements OnInit {
 
   constructor(
     private policyService: PolicyService,
-    private insuranceService: InsuranceService
+    private insuranceService: InsuranceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -85,5 +87,13 @@ export class AdminPortalComponent implements OnInit {
       },
       error: (err) => alert(err?.error?.message || '❌ Failed to update claim')
     });
+  }
+
+  toAudit() {
+    this.router.navigate(['/admin/audit']);
+  }
+
+  toSummary() {
+    this.router.navigate(['/admin/summary']);
   }
 }

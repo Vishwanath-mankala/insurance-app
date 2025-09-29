@@ -94,4 +94,22 @@ export const routes: Routes = [
     canActivate: [authGuard, authRoleGuard],
     data: { roles: ['admin'] },
   },
+  {
+    path: 'admin/audit',
+    loadComponent: () =>
+      import('./pages/audit-page/audit-page.component').then(
+        (m) => m.AuditPageComponent
+      ),
+    canActivate: [authGuard, authRoleGuard],
+    data: { roles: ['admin'] },
+  },
+  {
+    path: 'admin/summary',
+    loadComponent: () =>
+      import('./pages/audit-page/audit-page.component').then(
+        (m) => m.AuditPageComponent
+      ),
+    canActivate: [authGuard, authRoleGuard],
+    data: { roles: ['admin'] },
+  },
 ];

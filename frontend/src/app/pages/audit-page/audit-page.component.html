@@ -1,0 +1,58 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="'admin'"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+    { label: 'Agent Edit Panel', path: '/agent-portal', roles: ['admin'] }
+  ]"
+></app-custom-navbar>
+
+<div class="container">
+  <div class="tabs">
+    <button [class.active]="view==='audit'" (click)="toAudit()">Audit Logs</button>
+    <button [class.active]="view==='summary'" (click)="toSummary()">Summary</button>
+  </div>
+
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error">
+    <div *ngIf="view==='audit'">
+      <h3>Audit Logs</h3>
+      <table class="table" *ngIf="auditLogs?.length; else noAudit">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Entity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of auditLogs">
+            <td>{{ log.timestamp | date:'short' }}</td>
+            <td>{{ log.userId || '-' }}</td>
+            <td>{{ log.action }}</td>
+            <td>{{ log.entity || '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noAudit>
+        <p>No audit logs found.</p>
+      </ng-template>
+    </div>
+
+    <div *ngIf="view==='summary'">
+      <h3>Admin Summary</h3>
+      <div class="grid">
+        <div class="card"><h4>Users</h4><p>{{ summary?.userCount }}</p></div>
+        <div class="card"><h4>Policies Sold</h4><p>{{ summary?.policiesSold }}</p></div>
+        <div class="card"><h4>Claims Pending</h4><p>{{ summary?.claimsPending }}</p></div>
+        <div class="card"><h4>Total Payments</h4><p>{{ summary?.totalPayments | currency:'INR' }}</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
