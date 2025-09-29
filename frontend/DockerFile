@@ -21,7 +21,7 @@ RUN npm install -g http-server
 # CMD ["http-server", "-p", "4200", "./"]
 # Expose Render’s dynamic port (not hardcoded)
 EXPOSE 8080
-
+ 
 # Use $PORT instead of 4200
 # CMD ["sh", "-c", "http-server ./dist/out -p $PORT"]
 CMD ["sh", "-c", "http-server ./dist/out -p $PORT -P http://127.0.0.1:$PORT?"]
