@@ -1,0 +1,51 @@
+<div class="buy-portal">
+  <h2>Buy Policy</h2>
+
+  <form (ngSubmit)="buyPolicy()">
+    <div class="form-group">
+      <label for="termMonths">Policy Term (months)</label>
+      <input
+        type="number"
+        id="termMonths"
+        [(ngModel)]="termMonths"
+        name="termMonths"
+        required
+        min="1"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="nomineeName">Nominee Name</label>
+      <input
+        type="text"
+        id="nomineeName"
+        [(ngModel)]="nominee.name"
+        name="nomineeName"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="nomineeRelation">Nominee Relation</label>
+      <input
+        type="text"
+        id="nomineeRelation"
+        [(ngModel)]="nominee.relation"
+        name="nomineeRelation"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="assignedAgent">Assigned Agent (optional)</label>
+      <input
+        type="text"
+        id="assignedAgent"
+        [(ngModel)]="assignedAgentId"
+        name="assignedAgentId"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Buy Policy</button>
+  </form>
+</div>

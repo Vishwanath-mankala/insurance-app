@@ -1,0 +1,72 @@
+.dashboard {
+  padding: 20px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: var(--caribbean-current);
+  color: var(--white);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(40, 75, 99, 0.2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--platinum);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(53, 53, 53, 0.08);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(40, 75, 99, 0.2);
+}
+
+.card button {
+  display: block;
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: var(--indigo-dye);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.card button:hover {
+  background: var(--caribbean-current);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table th,
+table td {
+  padding: 12px;
+  border: 1px solid var(--platinum);
+  text-align: left;
+}
+.pending {
+  color: orange;
+  font-weight: bold;
+}
