@@ -2,7 +2,7 @@ import { UserPolicy } from "./user-policy";
 
 export class Claim {
   constructor(
-    public id: string,
+    public _id: string,
     public userId: string,
     public userPolicyId: {policyProductId:string},
     public incidentDate: string,

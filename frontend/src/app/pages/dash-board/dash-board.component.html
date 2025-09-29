@@ -3,12 +3,12 @@
   [userRole]="userRole"
   [links]="[
     { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
-    { label: 'Dashboard', path: '/dashboard', roles: ['customer', 'admin'] },
-    { label: 'Admin Panel', path: '/admin', roles: ['admin'], primary: true },
-    { label: 'Settings', path: '/settings', disabled: false }
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+    { label: 'Agent Edit Panel', path: '/agent-portal', roles: ['admin'] },
   ]"
 >
 </app-custom-navbar>
+
 <div class="dashboard">
   <!-- Stats Section -->
   <div class="stats">
@@ -48,6 +48,9 @@
         <!-- Repayment -->
         <button (click)="toRepay(policy._id)">
           Repay
+        </button>
+                <button (click)="toDetails(policy._id)">
+          Policy Details
         </button>
 
         <!-- Submit Claim -->

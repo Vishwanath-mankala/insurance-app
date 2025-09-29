@@ -10,6 +10,7 @@ import { CustomButtonComponent } from '../../components/custom-button/custom-but
 import { Policy } from '../../models/policy';
 import { forkJoin } from 'rxjs';
 import { CustomNavbarComponent } from '../../components/custom-navbar/custom-navbar.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,10 +42,16 @@ export class DashboardComponent implements OnInit {
   constructor(
     private policyService: PolicyService,
     private insuranceService: InsuranceService,
+    private authService : AuthService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+     this.authService.user$.subscribe(
+      user=>{
+        this.userRole = user?.role
+      }
+    )
     forkJoin({
       policies: this.policyService.getAllPolicies(),
       userPolicies: this.policyService.getUserPolicies(),
@@ -84,11 +91,13 @@ export class DashboardComponent implements OnInit {
     return policy ? policy.title : 'Unknown Policy';
   }
   findClaimTitle(userPolicyId: any): string {
-    
+
     const up = this.userPolicies.find((u) => u._id == userPolicyId);
     return up?.policyProductId?.title || 'Unknown Policy';
   }
-
+  toDetails(id:string){
+    this.router.navigate(['/policy-details',id])
+  }
   /** Navigate to policy portal */
   toPolicyPortal(): void {
     this.router.navigate(['/policy-portal']);

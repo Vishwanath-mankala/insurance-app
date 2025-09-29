@@ -40,6 +40,7 @@ login(){
   ).subscribe({
     next:(res)=>{
       this.message = 'Login successful! Redirecting...';
+      console.log(res)
       setTimeout(()=>{
         this.router.navigate(['/home']);
       },2000)

@@ -9,7 +9,6 @@ export const routes: Routes = [
       import('./pages/landing-page/landing-page.component').then(
         (m) => m.LandingPageComponent
       ),
-    pathMatch: 'full',
   },
   {
     path: 'login',
@@ -29,7 +28,8 @@ export const routes: Routes = [
       import('./pages/dash-board/dash-board.component').then(
         (m) => m.DashboardComponent
       ),
-    canActivate: [authGuard],
+    canActivate: [authGuard, authRoleGuard],
+    data: { roles: ['customer', 'admin'] },
   },
   {
     path: 'policy-portal',
@@ -58,7 +58,7 @@ export const routes: Routes = [
     canActivate: [authGuard, authRoleGuard],
     data: { roles: ['customer'] },
   },
-    {
+  {
     path: 'claim-policy/:id',
     loadComponent: () =>
       import('./pages/claim-page/claim-page.component').then(
@@ -66,5 +66,32 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard, authRoleGuard],
     data: { roles: ['customer'] },
+  },
+  {
+    path: 'policy-details/:id',
+    loadComponent: () =>
+      import('./pages/policy-details/policy-details.component').then(
+        (m) => m.PolicyDetailsComponent
+      ),
+    canActivate: [authGuard, authRoleGuard],
+    data: { roles: ['customer'] },
+  },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./pages/admin-portal/admin-portal.component').then(
+        (m) => m.AdminPortalComponent
+      ),
+    canActivate: [authGuard, authRoleGuard],
+    data: { roles: ['admin'] },
+  },
+  {
+    path: 'agent-portal',
+    loadComponent: () =>
+      import('./pages/agent-portal/agent-portal.component').then(
+        (m) => m.AgentPortalComponent
+      ),
+    canActivate: [authGuard, authRoleGuard],
+    data: { roles: ['admin'] },
   },
 ];

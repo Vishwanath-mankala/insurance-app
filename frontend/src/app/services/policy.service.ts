@@ -25,7 +25,7 @@ export class PolicyService {
 
   // GET: Policy details by ID (public)
   getPolicyDetails(id: string): Observable<Policy> {
-    return this.http.get<Policy>(`${this.policyUrl}/${id}/policies`);
+    return this.http.get<Policy>(`${this.policyUrl}/policies/${id}`);
   }
 
   // POST: Create a new policy (Admin only)
@@ -59,7 +59,7 @@ export class PolicyService {
 
   // POST/PUT/DELETE: Cancel user policy
   cancelPolicy(policyId: string): Observable<any> {
-    return this.http.post(`${this.policyUrl}/user/${policyId}/cancel`, {});
+    return this.http.put(`${this.policyUrl}/user/${policyId}/cancel`, {});
     // 🔹 backend cancelPolicy is POST or DELETE? adjust accordingly.
   }
 }

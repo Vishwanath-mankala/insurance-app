@@ -13,7 +13,10 @@ export const authRoleGuard: CanActivateFn = (route, state) => {
   return auth.user$.pipe(
     map(user => {
       const userRole : string | undefined = user?.role;
-
+      // if(userRole==='admin'){
+      //   router.navigate(['/admin'])
+      //   return false
+      // }
       if (allowedRoles && userRole && !allowedRoles.includes(userRole)) {
         // 🚫 User doesn't have access → redirect
         router.navigate(['/']);

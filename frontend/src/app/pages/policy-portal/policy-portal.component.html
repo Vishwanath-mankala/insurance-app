@@ -3,9 +3,7 @@
   [userRole]="userRole"
   [links]="[
     { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
-    { label: 'Dashboard', path: '/dashboard', roles: ['customer', 'admin'] },
     { label: 'Admin Panel', path: '/admin', roles: ['admin'], primary: true },
-    { label: 'Settings', path: '/settings', disabled: false }
   ]"
 >
 </app-custom-navbar>
@@ -27,7 +25,6 @@
       [premium]="policy.premium"
       [term]="policy.termMonths"
       [coverage]="policy.minSumInsured"
-      (onClick_view)="viewPolicyDetails(policy._id)"
       (onClick_buy)="buyPolicy(policy._id)"
     ></app-card>
 

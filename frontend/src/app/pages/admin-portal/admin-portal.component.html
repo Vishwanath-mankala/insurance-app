@@ -1,0 +1,92 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="'admin'"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+    { label: 'Agent Edit Panel', path: '/agent-portal', roles: ['admin'] }
+  ]"
+>
+</app-custom-navbar>
+
+<div class="admin-portal">
+  <h2>⚙️ Admin Portal</h2>
+
+  <!-- Create Policy -->
+  <section class="card">
+    <h3>Create New Policy</h3>
+    <form (ngSubmit)="createPolicy()" class="form-grid">
+      <input type="text" [(ngModel)]="newPolicy.title" name="title" placeholder="Title" required />
+      <input type="text" [(ngModel)]="newPolicy.code" name="code" placeholder="Code" required />
+      <textarea [(ngModel)]="newPolicy.description" name="description" placeholder="Description"></textarea>
+      <input type="number" [(ngModel)]="newPolicy.premium" name="premium" placeholder="Premium (₹)" required />
+      <input type="number" [(ngModel)]="newPolicy.minSumInsured" name="coverage" placeholder="Coverage (₹)" required />
+      <input type="number" [(ngModel)]="newPolicy.termMonths" name="term" placeholder="Term (months)" required />
+      <button type="submit" class="btn primary">➕ Create Policy</button>
+    </form>
+  </section>
+
+  <!-- List Policies -->
+  <section class="card">
+    <h3>Existing Policies</h3>
+    <table class="table" *ngIf="policies.length; else noPolicies">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Code</th>
+          <th>Premium</th>
+          <th>Coverage</th>
+          <th>Term</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let policy of policies">
+          <td>{{ policy.title }}</td>
+          <td>{{ policy.code }}</td>
+          <td>₹{{ policy.premium }}</td>
+          <td>₹{{ policy.minSumInsured }}</td>
+          <td>{{ policy.termMonths }} months</td>
+          <td>
+            <button class="btn danger" (click)="deletePolicy(policy._id)">🗑 Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noPolicies>
+      <p>No policies found.</p>
+    </ng-template>
+  </section>
+
+  <!-- Manage Claims -->
+  <section class="card">
+    <h3>Manage Claims</h3>
+    <table class="table" *ngIf="claims.length; else noClaims">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let claim of claims">
+          <td>{{ claim._id }}</td>
+          <td>{{ claim.description }}</td>
+          <td>₹{{ claim.amountClaimed }}</td>
+          <td>{{ claim.status }}</td>
+          <td class="actions">
+            <button class="btn success" (click)="updateClaimStatus(claim._id, 'APPROVED')">Approve</button>
+            <button class="btn warning" (click)="updateClaimStatus(claim._id, 'PENDING')">Pending</button>
+            <button class="btn danger" (click)="updateClaimStatus(claim._id, 'REJECTED')">Reject</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noClaims>
+      <p>No claims submitted yet.</p>
+    </ng-template>
+  </section>
+</div>

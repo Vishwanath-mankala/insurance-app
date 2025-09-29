@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InsuranceService } from '../../services/insurance.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CustomNavbarComponent } from '../../components/custom-navbar/custom-navbar.component';
 
 @Component({
   selector: 'app-claim-page',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,CustomNavbarComponent],
   templateUrl: './claim-page.component.html',
   styleUrls: ['./claim-page.component.css']
 })

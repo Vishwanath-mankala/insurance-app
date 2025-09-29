@@ -1,0 +1,55 @@
+<div class="agent-portal">
+  <h2>👔 Agent Management Portal</h2>
+
+  <!-- Create Agent -->
+  <section class="card">
+    <h3>Create New Agent</h3>
+    <form (ngSubmit)="createAgent()" class="form-grid">
+      <input type="text" [(ngModel)]="newAgent.name" name="name" placeholder="Agent Name" required />
+      <input type="email" [(ngModel)]="newAgent.email" name="email" placeholder="Agent Email" required />
+      <input type="password" [(ngModel)]="newAgent.password" name="password" placeholder="Password" required />
+      <button type="submit" class="btn primary">➕ Create Agent</button>
+    </form>
+  </section>
+
+  <!-- Agent List -->
+  <section class="card">
+    <h3>Existing Agents</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agent of agents">
+          <td>{{ agent.name }}</td>
+          <td>{{ agent.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Assign Agent to Policy -->
+  <section class="card">
+    <h3>Assign Agent to User Policy</h3>
+    <form (ngSubmit)="assignAgent()" class="form-grid">
+      <select [(ngModel)]="selectedAgentId" name="agent" required>
+        <option value="" disabled selected>Select Agent</option>
+        <option *ngFor="let agent of agents" [value]="agent._id">
+          {{ agent.name }} ({{ agent.email }})
+        </option>
+      </select>
+
+      <select [(ngModel)]="selectedUserPolicyId" name="policy" required>
+        <option value="" disabled selected>Select User Policy</option>
+        <option *ngFor="let policy of userPolicies" [value]="policy._id">
+          {{ policy.policyProductId?.title || 'Unknown Policy' }} - {{ policy.status }}
+        </option>
+      </select>
+
+      <button type="submit" class="btn success">✅ Assign Agent</button>
+    </form>
+  </section>
+</div>

@@ -1,3 +1,12 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="'customer'"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+  ]"
+>
+</app-custom-navbar>
 <div class="claim-container">
   <h2>Submit a Claim</h2>
 

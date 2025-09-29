@@ -1,0 +1,51 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="'customer'"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+  ]"
+>
+</app-custom-navbar>
+<div class="policy-details" *ngIf="!loading && userPolicy && policy; else loadingOrError">
+  <h2>{{ policy.title }}</h2>
+  <p class="subtitle">Code: {{ policy.code }}</p>
+
+  <!-- Policy Product Info -->
+  <section class="product-info">
+    <h3>Policy Product Details</h3>
+    <ul>
+      <li><strong>Premium:</strong> ₹{{ policy.premium }}</li>
+      <li><strong>Coverage:</strong> ₹{{ policy.minSumInsured }}</li>
+      <li><strong>Term:</strong> {{ policy.termMonths }} months</li>
+      <li><strong>Description:</strong> {{ policy.description }}</li>
+    </ul>
+  </section>
+
+  <!-- User Policy Info -->
+  <section class="user-info">
+    <h3>Your Policy</h3>
+    <ul>
+      <li><strong>Status:</strong> {{ userPolicy.status }}</li>
+      <li><strong>Premium Paid:</strong> ₹{{ userPolicy.premiumPaid }}</li>
+      <li><strong>Start Date:</strong> {{ userPolicy.startDate | date }}</li>
+      <li><strong>End Date:</strong> {{ userPolicy.endDate | date }}</li>
+      <li>
+        <strong>Nominee:</strong> 
+        {{ userPolicy.nominee?.name }} ({{ userPolicy.nominee?.relation }})
+      </li>
+    </ul>
+  </section>
+
+<div class="actions">
+  <button class="btn-back" (click)="backToDashboard()">⬅ Back to Dashboard</button>
+  <button class="btn-cancel" (click)="cancelPolicy()">❌ Cancel Policy</button>
+</div>
+</div>
+
+<ng-template #loadingOrError>
+  <div class="status">
+    <p *ngIf="loading">Loading policy details...</p>
+    <p *ngIf="error">{{ error }}</p>
+  </div>
+</ng-template>

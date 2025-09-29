@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PolicyService } from '../../services/policy.service';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { CustomNavbarComponent } from '../../components/custom-navbar/custom-navbar.component';
 
 @Component({
   selector: 'app-buy-portal',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,CustomNavbarComponent],
   templateUrl: './buy-portal.component.html',
   styleUrls: ['./buy-portal.component.css'],
 })
