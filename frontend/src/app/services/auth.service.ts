@@ -25,7 +25,7 @@ export class AuthService {
           role: decodedToken.role,
         };
         this.userSubject.next(user);
-        router.navigate(['/'])
+        router.navigate(['/home'])
       }
     }
   }

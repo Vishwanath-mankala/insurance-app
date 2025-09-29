@@ -1,0 +1,35 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="userRole"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Dashboard', path: '/dashboard', roles: ['customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'], primary: true },
+    { label: 'Settings', path: '/settings', disabled: false }
+  ]"
+>
+</app-custom-navbar>
+
+<section class="policy-portal">
+  <div class="portal-header">
+    <h2 class="portal-title">Available Insurance Policies</h2>
+    <p class="portal-subtitle">
+      Choose the right policy that fits your needs — compare, view details, or buy instantly.
+    </p>
+  </div>
+
+  <div class="policy-grid">
+    @for (policy of allPolicies; track $index) {
+      <app-card
+        [title]="policy.title"
+        [content]="policy.description"
+        [premium]="policy.premium"
+        [term]="policy.termMonths"
+        [coverage]="policy.minSumInsured"
+        [isFeatured]="true"
+        (onClick_view)="viewPolicyDetails(policy.id)"
+        (onClick_buy)="buyPolicy(policy.id)"
+      ></app-card>
+    }
+  </div>
+</section>

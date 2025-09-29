@@ -9,7 +9,7 @@ export const register_ = async ({ userData }) => {
   }
   const newUser = new User({ name, email, passwordHash:password, role });
   await newUser.save();
-  return { message: "User registered successfully", userId: newUser._id };
+  return { message: "User registered successfully", user:{userId: newUser._id, name: newUser.name, email: newUser.email, role: newUser.role} };
 };
 
 export const login_ = async ({ email, password }) => {

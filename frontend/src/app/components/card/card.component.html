@@ -1,23 +1,26 @@
 <div class="card">
+  <div class="card-badge" *ngIf="isFeatured">⭐ Recommended</div>
+  
   <div class="card-body">
     <h4 class="card-title">{{ title }}</h4>
     <p class="card-text">{{ content }}</p>
-    <p class="card-premium">💰 Premium: {{ premium }} / month</p>
-    <p class="card-term">⏳ Term: {{ term }} months</p>
-    <p class="card-coverage">🛡️ Coverage: ₹{{ coverage }}+</p>
+
+    <div class="card-info">
+      <p class="card-premium">💰 Premium: {{ premium }} / month</p>
+      <p class="card-term">⏳ Term: {{ term }} months</p>
+      <p class="card-coverage">🛡️ Coverage: ₹{{ coverage }}+</p>
+    </div>
 
     <div class="button-group">
       <app-custom-button
         [label]="'View Details'"
         [color]="'primary'"
         (clicked)="onClick_view()"
-        [disabled]="false"
       ></app-custom-button>
       <app-custom-button
         [label]="'Buy'"
         [color]="'secondary'"
         (clicked)="onClick_buy()"
-        [disabled]="false"
       ></app-custom-button>
     </div>
   </div>

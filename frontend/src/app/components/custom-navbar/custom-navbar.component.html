@@ -1,0 +1,26 @@
+<header class="navbar">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="/">
+      {{ brand }}
+    </a>
+
+    <!-- Navigation Links -->
+    <nav class="navbar-links">
+      <ng-container *ngFor="let link of links">
+        <a
+          *ngIf="isVisible(link)"
+          [routerLink]="!link.disabled ? link.path : null"
+          class="navbar-link"
+          [ngClass]="{
+            'navbar-link-primary': link.primary,
+            'navbar-link-disabled': link.disabled
+          }"
+          [attr.aria-disabled]="link.disabled"
+        >
+          {{ link.label }}
+        </a>
+      </ng-container>
+    </nav>
+  </div>
+</header>

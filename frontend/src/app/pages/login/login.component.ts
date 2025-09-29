@@ -18,7 +18,20 @@ password:string='';
 message:string='';
 loading:boolean=false;
 constructor(private auth :AuthService,public router:Router){}
+ngOnInit(){
+   if(this.auth.checkLogin()){
+    setTimeout(() => {
+      this.loading=true;
+    }, 4000);
+    this.router.navigate(['/home']);
+  }
+}
 login(){
+  if(this.auth.checkLogin()){
+    this.router.navigate(['/home']);
+  }
+  else{
+
   this.loading=true;
   this.auth.login(this.email,this.password).pipe(
     finalize(()=>{
@@ -28,7 +41,7 @@ login(){
     next:(res)=>{
       this.message = 'Login successful! Redirecting...';
       setTimeout(()=>{
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       },2000)
     },
     error:(err)=>{
@@ -36,4 +49,5 @@ login(){
     }
   })
 }
+  }
 }

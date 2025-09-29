@@ -1,0 +1,59 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  background: #284b63; /* Indigo Dye */
+  color: white;
+  padding: 1rem 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-link {
+  color: #d9d9d9; /* Platinum */
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.navbar-link:hover {
+  background: #3c6e71; /* Caribbean Current */
+  color: #fff;
+}
+
+.navbar-link-primary {
+  background: #3c6e71;
+  color: #fff;
+  font-weight: 600;
+}
+
+.navbar-link-primary:hover {
+  background: #353535; /* Jet */
+}
+
+.navbar-link-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
