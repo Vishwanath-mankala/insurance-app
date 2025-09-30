@@ -5,12 +5,11 @@ import { PolicyService } from '../../services/policy.service';
 import { Policy } from '../../models/policy';
 import { UserPolicy } from '../../models/user-policy';
 import { CustomNavbarComponent } from '../../components/custom-navbar/custom-navbar.component';
-import { CustomButtonComponent } from '../../components/custom-button/custom-button.component';
 
 @Component({
   selector: 'app-policy-details',
   standalone: true,
-  imports: [CommonModule,CustomNavbarComponent,CustomButtonComponent],
+  imports: [CommonModule,CustomNavbarComponent],
   templateUrl: './policy-details.component.html',
   styleUrls: ['./policy-details.component.css']
 })
