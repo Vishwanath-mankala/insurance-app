@@ -19,7 +19,6 @@ import { AuthService } from '../../services/auth.service';
     NgFor,
     NgIf,
     CurrencyPipe,
-    DatePipe,
     AsyncPipe,
     CustomButtonComponent,
     CustomNavbarComponent,

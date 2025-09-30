@@ -22,7 +22,10 @@ export class AgentService {
     return this.http.get(`${this.agentUrl}/`);
   }
 
-  assignAgent(agentId: string, userPolicyId: string) {
-    return this.http.put(`${this.agentUrl}/${agentId}/assign`, userPolicyId);
-  }
+ assignAgent(agentId: string, userPolicyId: string) {
+  return this.http.put(`${this.agentUrl}/${agentId}/assign`, {
+    userPolicyId: userPolicyId
+  });
+}
+
 }

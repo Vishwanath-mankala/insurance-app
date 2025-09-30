@@ -19,7 +19,7 @@ export class AuthService {
       if (token) {
         const decodedToken = this.jwtHelper.decodeToken(token);
         const user: User = {
-          id: decodedToken.userid,
+          _id: decodedToken.userid,
           name: decodedToken.name,
           email: decodedToken.email,
           role: decodedToken.role,
