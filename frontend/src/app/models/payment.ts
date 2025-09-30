@@ -3,9 +3,8 @@ export class Payments {
     public id: string,
     public userPolicyId: any,
     public amount: number,
-    public dueDate: string,
+    public method:string,
     public status: 'paid' | 'due' | 'overdue',
-    public policyType: string,
     public createdAt?: string
   ) {}
 }

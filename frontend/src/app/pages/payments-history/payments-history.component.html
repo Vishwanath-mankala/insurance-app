@@ -10,6 +10,11 @@
 </app-custom-navbar>
 
 <section class="payments">
+    <app-custom-button 
+  [label]="'Back'"
+  [color]="'primary'"
+  (clicked)="goBack()"
+  ></app-custom-button>
   <h2>Payments History</h2>
 
   <div *ngIf="loading">Loading...</div>
@@ -18,18 +23,18 @@
   <table class="table" *ngIf="!loading && !error && payments?.length; else noPayments">
     <thead>
       <tr>
-        <th>Due Date</th>
+        <th>Date</th>
         <th>Policy</th>
         <th>Amount</th>
-        <th>Status</th>
+        <th>Method</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let p of payments">
-        <td>{{ p.dueDate | date:'short' }}</td>
-        <td>{{ p.userPolicyId?.policyProductId?.title || p.policyType || p.userPolicyId }}</td>
+        <td>{{ p.createdAt | date:'short' }}</td>
+        <td>{{ findTitle(p.userPolicyId.policyProductId)}}</td>
         <td>{{ p.amount | currency:'INR' }}</td>
-        <td>{{ (p.status || 'paid') | uppercase }}</td>
+        <td>{{ (p.method) | uppercase }}</td>
       </tr>
     </tbody>
   </table>

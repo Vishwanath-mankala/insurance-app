@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { PolicyService } from '../../services/policy.service';
 import { InsuranceService } from '../../services/insurance.service';
 import { UserPolicy } from '../../models/user-policy';
@@ -20,13 +20,14 @@ import { AuthService } from '../../services/auth.service';
     NgIf,
     CurrencyPipe,
     DatePipe,
+    AsyncPipe,
     CustomButtonComponent,
     CustomNavbarComponent,
   ],
   templateUrl: './dash-board.component.html',
   styleUrls: ['./dash-board.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   userPolicies: UserPolicy[] = [];
   userRole: string | undefined = 'customer';
   claims: Claim[] = [];
@@ -42,11 +43,11 @@ export class DashboardComponent implements OnInit {
   constructor(
     private policyService: PolicyService,
     private insuranceService: InsuranceService,
-    private authService : AuthService,
+    public  authService : AuthService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.authService.user$.subscribe(
       user => {
         this.userRole = user?.role;
@@ -73,10 +74,6 @@ export class DashboardComponent implements OnInit {
       this.policies = policies;
       this.userPolicies = userPolicies;
       this.claims = claims;
-
-      console.log('📌 Policies:', this.policies);
-      console.log('📌 User Policies:', this.userPolicies);
-      console.log('📌 User Claimed Policies:', this.claims);
 
       // derived stats
       this.totalPolicies = this.userPolicies.length;

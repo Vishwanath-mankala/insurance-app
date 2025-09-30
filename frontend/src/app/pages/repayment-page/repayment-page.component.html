@@ -1,4 +1,26 @@
+<app-custom-navbar
+  brand="I Am Insured!"
+  [userRole]="(authService.user$ | async)?.role"
+  [links]="[
+    { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+    { label: 'Agent Edit Panel', path: '/agent-portal', roles: ['admin'] },
+    { label: 'Audit Logs', path: '/admin/audit', roles: ['admin'] },
+    { label: 'Summary', path: '/admin/summary', roles: ['admin'] },
+    { label: 'Payments', path: '/payments', roles: ['customer','admin'] },
+  ]"
+>
+</app-custom-navbar>
 <div class="payment-container">
+  
+  
+  
+  <app-custom-button 
+  [label]="'Back'"
+  [color]="'primary'"
+  (clicked)="goBack()"
+  ></app-custom-button>
+
   <h2>Dummy Payment Gateway</h2>
 
   <form (ngSubmit)="makePayment()" #paymentForm="ngForm">

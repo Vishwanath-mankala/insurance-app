@@ -5,11 +5,12 @@ import { PolicyService } from '../../services/policy.service';
 import { Policy } from '../../models/policy';
 import { UserPolicy } from '../../models/user-policy';
 import { CustomNavbarComponent } from '../../components/custom-navbar/custom-navbar.component';
+import { CustomButtonComponent } from '../../components/custom-button/custom-button.component';
 
 @Component({
   selector: 'app-policy-details',
   standalone: true,
-  imports: [CommonModule,CustomNavbarComponent],
+  imports: [CommonModule,CustomNavbarComponent,CustomButtonComponent],
   templateUrl: './policy-details.component.html',
   styleUrls: ['./policy-details.component.css']
 })
@@ -34,7 +35,7 @@ export class PolicyDetailsComponent implements OnInit {
       this.loading = false;
       return;
     }
-
+    
     // Step 1: fetch all user policies
     this.policyService.getUserPolicies().subscribe({
       next: (userPolicies: UserPolicy[]) => {
@@ -76,7 +77,9 @@ export class PolicyDetailsComponent implements OnInit {
       }
     });
   }
-
+    goBack(){
+    this.router.navigate(['/home'])
+  }
   backToDashboard() {
     this.router.navigate(['/home']);
   }

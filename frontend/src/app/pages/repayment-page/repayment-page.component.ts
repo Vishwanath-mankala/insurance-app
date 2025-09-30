@@ -3,17 +3,22 @@ import { InsuranceService } from '../../services/insurance.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CustomButtonComponent } from '../../components/custom-button/custom-button.component';
+import { CustomNavbarComponent } from "../../components/custom-navbar/custom-navbar.component";
+import { AuthService } from '../../services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-repayment-page',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, CustomButtonComponent, CustomNavbarComponent],
   templateUrl: './repayment-page.component.html',
   styleUrl: './repayment-page.component.css'
 })
 export class RepaymentPageComponent {
 
   constructor(private insuranceService:InsuranceService,private router:Router,
-        private route: ActivatedRoute,
+        private route: ActivatedRoute,public authService :AuthService,
+        private location :Location
 
   ){ }
   amount: number = 8000; // default amount
@@ -25,6 +30,13 @@ export class RepaymentPageComponent {
         this.userPolicyId = this.route.snapshot.paramMap.get('id') || '';
 
   }
+goBack(): void {
+  if (window.history.length > 1) {
+    this.location.back();
+  } else {
+    this.router.navigate(['/home']);
+  }
+}
   makePayment() {
     if (!this.amount || !this.method) {
       alert('Please select a method and enter amount.');

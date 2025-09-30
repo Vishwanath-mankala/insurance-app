@@ -5,11 +5,12 @@ import { CustomNavbarComponent } from '../../components/custom-navbar/custom-nav
 import { AuthService } from '../../services/auth.service';
 import { CardComponent } from '../../components/card/card.component';
 import { Router } from '@angular/router';
+import { CustomButtonComponent } from '../../components/custom-button/custom-button.component';
 
 @Component({
   selector: 'app-policy-portal',
   standalone: true,
-  imports: [CustomNavbarComponent, CardComponent],
+  imports: [CustomNavbarComponent, CardComponent,CustomButtonComponent],
   templateUrl: './policy-portal.component.html',
   styleUrls: ['./policy-portal.component.css']
 })
@@ -33,7 +34,9 @@ export class PolicyPortalComponent {
       console.log("Fetched Policies:", this.allPolicies);
     });
   }
-
+  goBack(){
+    this.router.navigate(['/home'])
+  }
   viewPolicyDetails(id: string) {
     this.router.navigate(['/policy-details', id]);
   }

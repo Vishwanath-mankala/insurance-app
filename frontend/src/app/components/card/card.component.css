@@ -92,10 +92,7 @@
   transform: translateX(4px);
 }
 
-/* Buttons */
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-  gap: 12px;
+
+.custom-btn{
+  width:auto
 }

@@ -4,11 +4,12 @@ import { PolicyService } from '../../services/policy.service';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { CustomNavbarComponent } from '../../components/custom-navbar/custom-navbar.component';
+import { CustomButtonComponent } from "../../components/custom-button/custom-button.component";
 
 @Component({
   selector: 'app-buy-portal',
   standalone: true,
-  imports: [FormsModule,CustomNavbarComponent],
+  imports: [FormsModule, CustomNavbarComponent, CustomButtonComponent],
   templateUrl: './buy-portal.component.html',
   styleUrls: ['./buy-portal.component.css'],
 })
@@ -30,6 +31,9 @@ export class BuyPortalComponent {
   ngOnInit(): void {
     // extract policy id from url param
     this.policyId = this.route.snapshot.paramMap.get('id') || '';
+  }
+      goBack(){
+    this.router.navigate(['/home'])
   }
 
   buyPolicy(): void {

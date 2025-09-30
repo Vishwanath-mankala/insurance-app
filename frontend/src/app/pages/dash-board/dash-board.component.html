@@ -1,6 +1,6 @@
 <app-custom-navbar
   brand="I Am Insured!"
-  [userRole]="userRole"
+  [userRole]="(authService.user$ | async)?.role"
   [links]="[
     { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
     { label: 'Admin Panel', path: '/admin', roles: ['admin'] },

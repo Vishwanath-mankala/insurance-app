@@ -9,6 +9,11 @@
 </app-custom-navbar>
 
 <div class="buy-portal">
+  <app-custom-button 
+  [label]="'Back'"
+  [color]="'primary'"
+  (clicked)="goBack()"
+  ></app-custom-button>
   <h2>Buy Policy</h2>
 
   <form (ngSubmit)="buyPolicy()">

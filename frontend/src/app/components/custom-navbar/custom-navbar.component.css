@@ -15,6 +15,20 @@
   justify-content: space-between;
   align-items: center;
 }
+.navbar-link-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: #3c6e71;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar-link-btn:hover {
+  background: #353535;
+}
 
 .navbar-brand {
   font-size: 1.5rem;
@@ -29,7 +43,7 @@
 }
 
 .navbar-link {
-  color: #330707; /* Platinum */
+  color: #999494; /* Platinum */
   text-decoration: none;
   font-weight: 500;
   padding: 0.5rem 1rem;

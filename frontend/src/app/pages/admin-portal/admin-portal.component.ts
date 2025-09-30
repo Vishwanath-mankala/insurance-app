@@ -48,16 +48,27 @@ export class AdminPortalComponent implements OnInit {
     });
   }
 
-  createPolicy() {
-    this.policyService.createPolicy(this.newPolicy).subscribe({
-      next: () => {
-        alert('✅ Policy created successfully');
-        this.newPolicy = { code: '', title: '', description: '', premium: 0, termMonths: 12, minSumInsured: 0 };
-        this.loadPolicies();
-      },
-      error: (err) => alert(err?.error?.message || '❌ Failed to create policy')
-    });
-  }
+resetPolicyForm() {
+  this.newPolicy = {
+    code: '',
+    title: '',
+    description: '',
+    premium: 0,
+    termMonths: 12,
+    minSumInsured: 0
+  };
+}
+
+createPolicy() {
+  this.policyService.createPolicy(this.newPolicy).subscribe({
+    next: () => {
+      alert('✅ Policy created successfully');
+      this.resetPolicyForm();
+      this.loadPolicies();
+    },
+    error: (err) => alert(err?.error?.message || '❌ Failed to create policy')
+  });
+}
 
   deletePolicy(id: string) {
     if (confirm('Are you sure you want to delete this policy?')) {

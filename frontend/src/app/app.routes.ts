@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { authRoleGuard } from './guards/auth-role.guard';
+import { DashboardComponent } from './pages/dash-board/dash-board.component';
 
 export const routes: Routes = [
   {
@@ -22,14 +23,20 @@ export const routes: Routes = [
         (m) => m.RegisterComponent
       ),
   },
+  // {
+  //   path: 'home',
+  //   loadComponent: () =>
+  //     import('./pages/dash-board/dash-board.component').then(
+  //       (m) => m.DashboardComponent
+  //     ),
+  //   canActivate: [authGuard, authRoleGuard],
+  //   data: { roles: ['customer', 'admin'] },
+  // },
   {
     path: 'home',
-    loadComponent: () =>
-      import('./pages/dash-board/dash-board.component').then(
-        (m) => m.DashboardComponent
-      ),
+    component: DashboardComponent,
     canActivate: [authGuard, authRoleGuard],
-    data: { roles: ['customer', 'admin'] },
+    data: { roles: ['customer', 'admin', 'agent'] },
   },
   {
     path: 'policy-portal',
@@ -119,6 +126,6 @@ export const routes: Routes = [
         (m) => m.PaymentsHistoryComponent
       ),
     canActivate: [authGuard, authRoleGuard],
-    data: { roles: ['customer','admin'] },
+    data: { roles: ['customer', 'admin'] },
   },
 ];

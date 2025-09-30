@@ -11,6 +11,11 @@
 </app-custom-navbar>
 
 <section class="policy-portal">
+    <app-custom-button 
+  [label]="'Back'"
+  [color]="'primary'"
+  (clicked)="goBack()"
+  ></app-custom-button>
   <div class="portal-header">
     <h2 class="portal-title">Available Insurance Policies</h2>
     <p class="portal-subtitle">
