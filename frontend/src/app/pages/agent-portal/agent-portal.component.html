@@ -37,7 +37,7 @@
     <form (ngSubmit)="assignAgent()" class="form-grid">
       <select [(ngModel)]="selectedAgentId" name="agent" required>
         <option value="" disabled selected>Select Agent</option>
-        <option *ngFor="let agent of agents" [value]="agent._id">
+        <option *ngFor="let agent of agents" [value]="agent.id">
           {{ agent.name }} ({{ agent.email }})
         </option>
       </select>
@@ -45,7 +45,7 @@
       <select [(ngModel)]="selectedUserPolicyId" name="policy" required>
         <option value="" disabled selected>Select User Policy</option>
         <option *ngFor="let policy of userPolicies" [value]="policy._id">
-          {{ policy.policyProductId?.title || 'Unknown Policy' }} - {{ policy.status }}
+          {{ findTitle(policy.policyProductId) }} - {{ policy.status }}
         </option>
       </select>
 

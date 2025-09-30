@@ -5,7 +5,7 @@ import { authRoles } from "../middlewares/authRolesMiddleWare.js";
 
 const router = express.Router();
 
-router.get("/",authMiddleware,authRoles('customer'), getUserPolicies);
+router.get("/",authMiddleware,authRoles('customer','admin'), getUserPolicies);
 router.put("/:id/cancel",authMiddleware,authRoles('customer'), cancelPolicy);
 
 export default router;

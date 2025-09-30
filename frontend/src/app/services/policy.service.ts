@@ -51,7 +51,7 @@ export class PolicyService {
   }
 
   // GET: User's purchased policies
-  getUserPolicies(): Observable<UserPolicy[]> {
+  getUserPolicies() {
     return this.http.get<UserPolicy[]>(`${this.policyUrl}/user/`);
     // 🔹 make sure your backend has /policies/my-policies route,
     // if not, you can mount getUserPolicies() on /users/me/policies
