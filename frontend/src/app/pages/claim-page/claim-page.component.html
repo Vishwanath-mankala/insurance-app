@@ -3,10 +3,11 @@
   [userRole]="'customer'"
   [links]="[
     { label: 'Home', path: '/home', roles: ['agent', 'customer', 'admin'] },
-    { label: 'Admin Panel', path: '/admin', roles: ['admin'] },
+    { label: 'Admin Panel', path: '/admin', roles: ['admin'] }
   ]"
 >
 </app-custom-navbar>
+
 <div class="claim-container">
   <h2>Submit a Claim</h2>
 
@@ -45,6 +46,11 @@
         name="amountClaimed"
         required
       />
+      <!-- Show min insured if available -->
+      <p *ngIf="minInsured" class="info-text">
+        ⚠️ Minimum insured amount for this policy: 
+        <span class="highlight">₹{{ minInsured }}</span>
+      </p>
     </div>
 
     <!-- Submit Button -->

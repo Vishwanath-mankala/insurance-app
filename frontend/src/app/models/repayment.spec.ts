@@ -1,7 +1,7 @@
-import { Repayment } from './payment';
+import { Payments } from './payment';
 
-describe('Repayment', () => {
+describe('Payments', () => {
   it('should create an instance', () => {
-    expect(new Repayment()).toBeTruthy();
+    expect(new Payments('1', 'up1', 100, 'card', 'paid')).toBeTruthy();
   });
 });

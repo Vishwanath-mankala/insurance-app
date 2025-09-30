@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomNavbarComponent } from './custom-navbar.component';
+import { AuthService } from '../../services/auth.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CustomNavbarComponent', () => {
   let component: CustomNavbarComponent;
@@ -8,7 +10,10 @@ describe('CustomNavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomNavbarComponent]
+      imports: [CustomNavbarComponent, RouterTestingModule],
+      providers: [
+        { provide: AuthService, useValue: { logout: jasmine.createSpy('logout') } },
+      ],
     })
     .compileComponents();
 

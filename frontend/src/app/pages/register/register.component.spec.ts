@@ -16,10 +16,9 @@ import { By } from '@angular/platform-browser';
 class MockAuthService {
   register(name: string, email: string, password: string, role: string) {
     return of({
-      id: '123',
+      _id: '123',
       name,
       email,
-      password,
       role,
     } as User);
   }

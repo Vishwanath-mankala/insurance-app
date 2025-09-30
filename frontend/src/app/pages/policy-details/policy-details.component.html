@@ -7,11 +7,6 @@
   ]"
 >
 </app-custom-navbar>
-  <app-custom-button 
-  [label]="'Back'"
-  [color]="'primary'"
-  (clicked)="goBack()"
-  ></app-custom-button>
 <div class="policy-details" *ngIf="!loading && userPolicy && policy; else loadingOrError">
   <h2>{{ policy.title }}</h2>
   <p class="subtitle">Code: {{ policy.code }}</p>

@@ -11,6 +11,7 @@ import { User } from '../../models/user';
 
 // Mock AuthService
 class MockAuthService {
+  checkLogin() { return false; }
   login(email: string, password: string) {
     return of({ token: 'abc123' ,user:User});
   }
@@ -74,12 +75,12 @@ describe('LoginComponent', () => {
   }));
 
   // 5️⃣ Router navigation after login
-  it('should navigate to / after login success', fakeAsync(() => {
+  it('should navigate to /home after login success', fakeAsync(() => {
     spyOn(authService, 'login').and.returnValue(of({ token: 'abc123', user: {} as User }));
     component.login();
     tick(); // flush observable
     tick(2000); // flush setTimeout
-    expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(router.navigate).toHaveBeenCalledWith(['/home']);
   }));
 
   // 6️⃣ Failed login sets error message

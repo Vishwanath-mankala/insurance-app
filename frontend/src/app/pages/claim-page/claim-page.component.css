@@ -1,54 +1,76 @@
 .claim-container {
-  max-width: 500px;
-  margin: 30px auto;
-  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.claim-container h2 {
+h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #2c3e50;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
 
 label {
-  margin-bottom: 6px;
   font-weight: 600;
-  color: #444;
+  margin-bottom: 8px;
+  color: #34495e;
 }
 
 input,
 textarea {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccd0d5;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-textarea {
-  resize: vertical;
+input:focus,
+textarea:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 6px rgba(0, 119, 204, 0.4);
+  outline: none;
 }
 
 .btn-submit {
   width: 100%;
   padding: 12px;
-  background-color: #1976d2;
+  background-color: #0077cc;
   color: #fff;
+  font-size: 1.1rem;
   font-weight: bold;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 .btn-submit:hover {
-  background-color: #125a9c;
+  background-color: #005fa3;
+}
+
+.info-text {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-left: 4px solid #0077cc;
+  border-radius: 6px;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #0077cc;
 }
