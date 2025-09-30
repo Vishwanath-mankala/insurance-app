@@ -18,7 +18,7 @@ export class RepaymentPageComponent {
 
   constructor(private insuranceService:InsuranceService,private router:Router,
         private route: ActivatedRoute,public authService :AuthService,
-        private location :Location
+        private location :Location,
 
   ){ }
   amount: number = 8000; // default amount
